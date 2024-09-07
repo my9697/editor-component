@@ -7,22 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACard: typeof import('ant-design-vue/es')['Card']
-    ACardMeta: typeof import('ant-design-vue/es')['CardMeta']
-    ACol: typeof import('ant-design-vue/es')['Col']
-    ADrawer: typeof import('ant-design-vue/es')['Drawer']
-    ALayout: typeof import('ant-design-vue/es')['Layout']
-    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
-    ALayoutFooter: typeof import('ant-design-vue/es')['LayoutFooter']
-    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
-    ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
-    AModal: typeof import('ant-design-vue/es')['Modal']
-    ARow: typeof import('ant-design-vue/es')['Row']
-    ATabPane: typeof import('ant-design-vue/es')['TabPane']
-    ATabs: typeof import('ant-design-vue/es')['Tabs']
-    ATag: typeof import('ant-design-vue/es')['Tag']
+    ImageComp: typeof import('./src/components/ImageComp/ImageComp.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TextComp: typeof import('./src/components/TextComp/TextComp.vue')['default']
   }
 }

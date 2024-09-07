@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],
+  "declaration": true, // 生成 .d.ts 文件
+  "declarationMap": true, // 生成 .d.ts.map 文件（可选）
+  "emitDeclarationOnly": true, // 仅生成声明文件，而不生成 JavaScript 文件
+  "outDir": "./dist", // 输出声明文件的目录
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
