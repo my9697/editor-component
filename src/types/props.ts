@@ -40,3 +40,13 @@ export interface TextComponentProps extends CommonComponentProps {
   backgroundColor?: string
   tag?: string
 }
+
+export interface ImageComponentProps extends CommonComponentProps {
+  src: string
+}
+
+export interface ShapeComponentProps extends CommonComponentProps {
+  backgroundColor: string
+}
+
+export type AllComponentProps = TextComponentProps & ImageComponentProps & ShapeComponentProps
