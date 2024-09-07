@@ -1,0 +1,235 @@
+<script setup lang="ts">
+import type { UploaderFile, ActionType } from '@/types/upload'
+import { v4 as uid } from 'uuid'
+import { computed, reactive, ref } from 'vue'
+import axios from 'axios'
+import { DeleteOutlined, FileOutlined, LoadingOutlined } from '@ant-design/icons-vue'
+import { last } from 'lodash-es'
+
+const props = defineProps<ActionType>()
+
+const fileInput = ref<null | HTMLInputElement>(null)
+const fileList = ref<UploaderFile[]>([])
+const isUploading = computed(() => {
+  return fileList.value.some((file) => file.status === 'loading')
+})
+const lastFileData = computed(() => {
+  const lastFile = last(fileList.value)
+  if (lastFile) {
+    return {
+      loaded: lastFile.status === 'success',
+      data: lastFile.response
+    }
+  }
+  return false
+})
+const isDragOver = ref(false)
+let events: { [key: string]: (e: DragEvent) => void } = {
+  click: triggerUpload
+}
+
+if (props.drag) {
+  events = {
+    ...events,
+    dragover: (e: DragEvent) => {
+      handleDrag(e, true)
+    },
+    dragleave: (e: DragEvent) => {
+      handleDrag(e, true)
+    },
+    drop: handleDrop
+  }
+}
+
+function triggerUpload() {
+  if (fileInput.value) {
+    fileInput.value.click()
+  }
+}
+
+function postFile(readyFile: UploaderFile) {
+  const formData = new FormData()
+  formData.append(readyFile.name, readyFile.raw)
+  readyFile.status = 'loading'
+  axios
+    .post(props.url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then((res: any) => {
+      readyFile.status = 'success'
+      readyFile.response = res.data
+    })
+    .catch(() => {
+      readyFile.status = 'error'
+    })
+    .finally(() => {
+      if (fileInput.value) {
+        fileInput.value.value = ''
+      }
+    })
+}
+
+function uploadFiles(files: null | FileList) {
+  if (files) {
+    const uploadFile = files[0]
+    if (props.beforeUpload) {
+      const result = props.beforeUpload(uploadFile)
+      if (result && result instanceof Promise) {
+        result
+          .then((res) => {
+            if (res instanceof File) {
+              addFileToList(res)
+            } else {
+              throw new Error('beforeUpload Promise should return File object')
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else if (result === true) {
+        addFileToList(uploadFile)
+      }
+    } else {
+      addFileToList(uploadFile)
+    }
+  }
+}
+function addFileToList(uploadFile: File) {
+  const fileObj = reactive<UploaderFile>({
+    uid: uid(),
+    size: uploadFile.size,
+    name: uploadFile.name,
+    status: 'ready',
+    raw: uploadFile
+  })
+  fileList.value.push(fileObj)
+  if (props.autoUpload) {
+    fileList.value.forEach((file) => (file.status = 'loading'))
+    postFile(fileObj)
+  }
+}
+
+function uploadToFile(e: Event) {
+  e.stopPropagation()
+  fileList.value
+    .filter((file) => file.status === 'ready')
+    .forEach((readyFile) => postFile(readyFile))
+}
+
+function handleFileChange(e: Event) {
+  const target = e.target as HTMLInputElement
+  uploadFiles(target.files)
+}
+
+function removeFile(id: string) {
+  fileList.value = fileList.value.filter((file) => file.uid !== id)
+}
+
+function handleDrag(e: DragEvent, over: boolean) {
+  e.preventDefault()
+  isDragOver.value = over
+}
+
+function handleDrop(e: DragEvent) {
+  e.preventDefault()
+  isDragOver.value = false
+  if (e.dataTransfer) {
+    uploadFiles(e.dataTransfer.files)
+  }
+}
+</script>
+
+<template>
+  <div class="file-upload">
+    <div v-on="events" class="upload-area" :class="{ 'is-dragover': drag && isDragOver }">
+      <slot v-if="isUploading" name="loading">
+        <button disabled>正在上传</button>
+      </slot>
+      <slot
+        name="uploaded"
+        v-else-if="lastFileData && lastFileData.loaded"
+        :uploadedData="lastFileData.data"
+      >
+        <button>点击上传</button>
+      </slot>
+      <slot v-else name="default">
+        <button>点击上传</button>
+        <button v-if="!props.autoUpload" @click="uploadToFile">点击提交</button>
+      </slot>
+      <slot> </slot>
+    </div>
+    <input type="file" ref="fileInput" style="display: none" @change="handleFileChange" />
+    <ul class="upload-list">
+      <li :class="`upoaded-file upload-${file.status}`" v-for="file in fileList" :key="file.uid">
+        <span v-if="file.status === 'loading'" class="file-icon"><LoadingOutlined /></span>
+        <span v-else class="file-icon"><FileOutlined /></span>
+        <span class="filename">{{ file.name }}</span>
+        <button @click="removeFile(file.uid)" class="delete-file"><DeleteOutlined /></button>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped lang="less">
+.upload-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 5px;
+    border-radius: 4px;
+    min-width: 200px;
+    position: relative;
+    &:first-child {
+      margin-top: 10px;
+    }
+  }
+}
+.file-icon {
+  svg {
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.45);
+  }
+}
+.filename {
+  margin-left: 5px;
+  margin-right: 40px;
+}
+.uplod-uploading {
+  color: yellow;
+}
+.upload-success {
+  color: green;
+}
+&.upload-error {
+  color: #f5222d;
+  svg {
+    color: #f5222d;
+  }
+}
+.file-upload .upload-area {
+  background: #efefef;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 20px;
+  width: 360px;
+  height: 180px;
+  text-align: center;
+  &:hover {
+    border: 1px dashed #1890ff;
+  }
+  &.is-dragover {
+    border: 2px dashed #1890ff;
+    background: rgba(#1890ff, 0.2);
+  }
+}
+// .upload-area img{
+
+// }
+</style>
