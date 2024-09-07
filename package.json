@@ -1,19 +1,16 @@
 {
-  "name": "low-code-editor",
+  "name": "editor-components",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "types": "dist/index.d.ts",
-  "bin": {
-    "editor-components": "./dist/esmodule.js"
-  },
+  "types": "./dist/index.d.ts",
   "files": [
-    "lib"
+    "dist"
   ],
-  "main": "./lib/editoe-components.umd.js",
-  "module": "./lib/editoe-components.js",
+  "main": "./dist/editoe-components.umd.js",
+  "module": "./dist/editoe-components.js",
   "exports": {
-    "./lib/style.css": "./lib/style.css",
+    "./lib/style.css": "./dist/style.css",
     ".": {
       "import": "./dist/editor-components.js",
       "require": "./dist/editor-components.umd"
