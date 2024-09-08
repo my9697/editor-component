@@ -2,6 +2,6 @@ language:node_js
 node_js:
 - node
 deploy:
-provider:npm
-email:3173714073@qq.com
-api_key:"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"
+ provider:npm
+ email:3173714073@qq.com
+ api_key:"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"
