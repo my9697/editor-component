@@ -7,10 +7,10 @@ import {
 import { useCompCommon } from '@/hooks/useCompCommon'
 import type { ImageComponentProps, TextComponentProps } from '@/types/props'
 
+defineOptions({ name: 'sw-image' })
+
 const defaultProps = transformToComponentProps(imageDefaultProps)
-
 const props = withDefaults(defineProps<ImageComponentProps>(), {})
-
 const { handleClick, styleProps } = useCompCommon(props, imageStylePropsNames)
 </script>
 

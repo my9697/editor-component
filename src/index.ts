@@ -1,6 +1,6 @@
 import type { App } from 'vue'
-import ImageComp from './src/components/ImageComp.vue'
-import TextComp from './src/components/TextComp.vue'
+import ImageComp from './components/ImageComp/ImageComp.vue'
+import TextComp from './components/TextComp/TextComp.vue'
 
 const components = [ImageComp, TextComp]
 
