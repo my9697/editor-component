@@ -3,7 +3,7 @@ import type {
   ImageComponentProps,
   ShapeComponentProps,
   TextComponentProps
-} from '@/types/props'
+} from '../types/props'
 import { mapValues, without } from 'lodash-es'
 
 export const commonDefaultProps: CommonComponentProps = {

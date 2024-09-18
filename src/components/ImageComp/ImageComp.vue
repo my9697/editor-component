@@ -3,11 +3,9 @@ import {
   transformToComponentProps,
   imageDefaultProps,
   imageStylePropsNames
-} from '@/common/defaultProps'
-import { useCompCommon } from '@/hooks/useCompCommon'
-import type { ImageComponentProps, TextComponentProps } from '@/types/props'
-
-defineOptions({ name: 'sw-image' })
+} from '../../common/defaultProps'
+import { useCompCommon } from '../../hooks/useCompCommon'
+import type { ImageComponentProps, TextComponentProps } from '../../types/props'
 
 const defaultProps = transformToComponentProps(imageDefaultProps)
 const props = withDefaults(defineProps<ImageComponentProps>(), {})

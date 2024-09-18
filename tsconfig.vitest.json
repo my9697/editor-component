@@ -6,6 +6,10 @@
   "emitDeclarationOnly": true, // 仅生成声明文件，而不生成 JavaScript 文件
   "outDir": "./dist", // 输出声明文件的目录
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]},
+       "moduleResolution": "node",
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
 
@@ -13,3 +17,4 @@
     "types": ["node", "jsdom"]
   }
 }
+

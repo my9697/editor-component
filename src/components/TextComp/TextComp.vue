@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { textStylePropNames } from '@/common/defaultProps'
-import { useCompCommon } from '@/hooks/useCompCommon'
-import type { TextComponentProps } from '@/types/props'
+import { textStylePropNames } from '../../common/defaultProps'
+import { useCompCommon } from '../../hooks/useCompCommon'
+import type { TextComponentProps } from '../../types/props'
 
-defineOptions({ name: 'sw-text' })
 const props = defineProps<TextComponentProps>()
 
 const { styleProps, handleClick } = useCompCommon(props, textStylePropNames)

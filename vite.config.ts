@@ -26,8 +26,8 @@ export default defineConfig({
           dir: './dist'
         },
         {
-          format: 'umd',
-          entryFileNames: 'editor-components.umd.js',
+          format: 'cjs',
+          entryFileNames: 'editor-components.cjs',
           name: 'editor-components',
           dir: './dist'
         }
@@ -38,6 +38,7 @@ export default defineConfig({
       name: 'editor-components'
     }
   },
+
   plugins: [
     dts({
       outDir: './dist/'
