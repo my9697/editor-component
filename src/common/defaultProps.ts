@@ -6,6 +6,32 @@ import type {
 } from '../types/props'
 import { mapValues, without } from 'lodash-es'
 
+export interface ComponentData {
+  props: Record<string, any>
+  id: string
+  name: string
+  layerName?: string
+  isHidden?: boolean
+  isLocked?: boolean
+}
+
+export interface PageData {
+  props: Record<string, any>
+  setting: Record<string, any>
+  id?: number
+  title?: string
+  desc?: string
+  coverImg?: string
+  uuid?: string
+  latestPublishAt?: string
+  updatedAt?: string
+  isTemplate?: boolean
+  isHot?: boolean
+  isNew?: boolean
+  author?: string
+  status?: string
+}
+
 export const commonDefaultProps: CommonComponentProps = {
   // actions
   actionType: '',
