@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import { type App } from 'vue'
 import ImageComp from './components/ImageComp'
 import TextComp from './components/TextComp'
 import FinalComp from './components/FinalComp'

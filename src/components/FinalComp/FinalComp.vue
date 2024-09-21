@@ -6,8 +6,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import type { ComponentData, PageData } from '@/common/defaultProps'
+<script lang="ts" setup>
+import type { ComponentData, PageData } from '../../common/defaultProps'
 
 defineProps<{
   page: PageData
