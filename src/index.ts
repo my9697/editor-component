@@ -16,3 +16,17 @@ export { install, ImageComp, TextComp, FinalComp }
 export default {
   install
 }
+
+export {
+  type ComponentData,
+  type PageData,
+  commonDefaultProps,
+  imageDefaultProps,
+  imageStylePropsNames,
+  isEditingProp,
+  shapeDefaultProps,
+  shapeStylePropsNames,
+  textDefaultProps,
+  textStylePropNames,
+  transformToComponentProps
+} from './common/defaultProps'
