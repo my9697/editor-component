@@ -8,11 +8,6 @@ const props = defineProps<TextComponentProps>()
 
 const { styleProps, handleClick } = useCompCommon(props, textStylePropNames)
 
-// const handleClick = () => {
-//   if (props.actionType === 'url' && props.url) {
-//     window.location.href = props.url
-//   }
-// }
 </script>
 
 <template>
