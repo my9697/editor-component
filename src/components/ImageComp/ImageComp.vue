@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import {
-  imageStylePropsNames
-} from '../../common/defaultProps'
+import { imageDefaultProps, imageStylePropsNames } from '../../common/defaultProps'
 import { useCompCommon } from '../../hooks/useCompCommon'
 import type { ImageComponentProps } from '../../types/props'
 
-const props = withDefaults(defineProps<ImageComponentProps>(), {})
+const props = withDefaults(defineProps<ImageComponentProps>(), { ...imageDefaultProps })
 const { handleClick, styleProps } = useCompCommon(props, imageStylePropsNames)
 </script>
 
@@ -14,7 +12,6 @@ const { handleClick, styleProps } = useCompCommon(props, imageStylePropsNames)
     <img :style="styleProps" :src="props.src" @click="handleClick" />
   </div>
 </template>
-
 
 <style scoped lang="less">
 .image-comp {

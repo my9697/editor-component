@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { textStylePropNames } from '../../common/defaultProps'
+import { textDefaultProps, textStylePropNames } from '../../common/defaultProps'
 import { useCompCommon } from '../../hooks/useCompCommon'
 import type { TextComponentProps } from '../../types/props'
 
-const props = defineProps<TextComponentProps>()
+const props = withDefaults(defineProps<TextComponentProps>(), {
+  ...textDefaultProps
+})
 
 const { styleProps, handleClick } = useCompCommon(props, textStylePropNames)
-
 </script>
 
 <template>
