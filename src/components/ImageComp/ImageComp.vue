@@ -8,8 +8,8 @@ const { handleClick, styleProps } = useCompCommon(props, imageStylePropsNames)
 </script>
 
 <template>
-  <div class="image-comp">
-    <img :style="styleProps" :src="props.src" @click="handleClick" />
+  <div class="image-comp" :style="styleProps">
+    <img :src="props.src" @click="handleClick" />
   </div>
 </template>
 
