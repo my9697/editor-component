@@ -23,6 +23,7 @@ export interface CommonComponentProps {
   left?: string
   top?: string
   right?: string
+  tag: string
 }
 
 /**text属性 */
@@ -38,7 +39,6 @@ export interface TextComponentProps extends CommonComponentProps {
   textAlign?: string
   color?: string
   backgroundColor?: string
-  tag?: string
 }
 
 export interface ImageComponentProps extends CommonComponentProps {

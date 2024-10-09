@@ -5,11 +5,14 @@ import { computed } from 'vue'
 export const useCompCommon = (props: Partial<TextComponentProps>, styleNames: string[]) => {
   const styleProps = computed(() => pick(props, styleNames))
 
+  let isAnimation = false
   const handleClick = () => {
     if (props.actionType === 'url' && props.url) {
       window.location.href = props.url
+    } else if (props.actionType === 'animation') {
+      isAnimation = true
     }
   }
 
-  return { styleProps, handleClick }
+  return { styleProps, handleClick, isAnimation }
 }
