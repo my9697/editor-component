@@ -55,7 +55,8 @@ export const commonDefaultProps: CommonComponentProps = {
   position: 'absolute',
   left: '0',
   top: '0',
-  right: '0'
+  right: '0',
+  tag: 'div'
 }
 
 /**文本默认属性 */
@@ -71,7 +72,6 @@ export const textDefaultProps: TextComponentProps = {
   textAlign: 'left',
   color: '#000000',
   backgroundColor: '',
-  tag: 'div',
   ...commonDefaultProps
 }
 
