@@ -11,6 +11,7 @@ export const useCompCommon = (props: Partial<TextComponentProps>, styleNames: st
       window.location.href = props.url
     } else if (props.actionType === 'animation') {
       isAnimation.value = true
+      console.log('isAnimation.value', isAnimation.value)
     }
   }
 
