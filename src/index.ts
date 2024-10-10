@@ -18,7 +18,6 @@ export default {
 }
 
 export {
-  type ComponentData,
   type PageData,
   commonDefaultProps,
   imageDefaultProps,
