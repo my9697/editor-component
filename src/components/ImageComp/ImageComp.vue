@@ -1,26 +1,25 @@
 <script setup lang="ts">
 import { imageDefaultProps, imageStylePropsNames } from '../../common/defaultProps'
 import { useCompCommon } from '../../hooks/useCompCommon'
-import type { ImageComponentProps } from '../../types/props'
+import type { AllComponentProps } from '../../types/props'
 
-const props = withDefaults(defineProps<ImageComponentProps>(), { ...imageDefaultProps })
+const props = withDefaults(defineProps<AllComponentProps>(), { ...imageDefaultProps })
 const { handleClick, styleProps, isAnimation } = useCompCommon(props, imageStylePropsNames)
 </script>
 
 <template>
-  <component
-    :is="tag"
-    @click="handleClick"
+  <img
+    :src="props.src"
     :style="styleProps"
+    :draggable="false"
+    @click.prevent="handleClick"
     :class="['image-comp', isAnimation ? 'shake-animation' : '']"
-  >
-    <img :src="props.src" />
-  </component>
+  />
 </template>
 
 <style scoped lang="less">
 .image-comp {
-  width: 100%;
+  max-width: 100%;
   height: 100%;
 }
 
