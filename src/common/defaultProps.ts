@@ -69,7 +69,7 @@ export const textDefaultProps: TextComponentProps = {
   fontStyle: 'normal',
   textDecoration: 'none',
   lineHeight: '1',
-  textAlign: 'center',
+  textAlign: 'left',
   color: '#000000',
   backgroundColor: '',
   ...commonDefaultProps
