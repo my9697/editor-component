@@ -12,19 +12,9 @@ const { styleProps, handleClick } = useCompCommon(props, textStylePropNames)
 </script>
 
 <template>
-  <component
-    :is="tag"
-    @click="handleClick"
-    :style="styleProps"
-    :class="['text-comp']"
-  >
+  <component :is="tag" @click="handleClick" :style="styleProps" :class="['text-comp']">
     {{ text }}
   </component>
 </template>
 
-<style scoped lang="less">
-.text-comp {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style scoped lang="less"></style>

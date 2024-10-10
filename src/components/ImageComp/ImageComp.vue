@@ -17,9 +17,4 @@ const { handleClick, styleProps } = useCompCommon(props, imageStylePropsNames)
   />
 </template>
 
-<style scoped lang="less">
-.image-comp {
-  max-width: 100%;
-  max-height: 100%;
-}
-</style>
+<style scoped lang="less"></style>
