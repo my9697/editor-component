@@ -1,8 +1,8 @@
-import type { TextComponentProps } from '../types/props'
+import type { AllComponentProps } from '../types/props'
 import { pick } from 'lodash-es'
 import { computed, ref } from 'vue'
 
-export const useCompCommon = (props: Partial<TextComponentProps>, styleNames: string[]) => {
+export const useCompCommon = (props: Partial<AllComponentProps>, styleNames: string[]) => {
   const styleProps = computed(() => pick(props, styleNames))
 
   const isAnimation = ref(false)
@@ -11,7 +11,6 @@ export const useCompCommon = (props: Partial<TextComponentProps>, styleNames: st
       window.location.href = props.url
     } else if (props.actionType === 'animation') {
       isAnimation.value = true
-      console.log('isAnimation.value', isAnimation.value)
     }
   }
 
