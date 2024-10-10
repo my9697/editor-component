@@ -11,7 +11,6 @@ export const useCompCommon = (props: Partial<AllComponentProps>, styleNames: str
       window.location.href = props.url
     } else if (props.actionType === 'animation') {
       isAnimation.value = true
-      console.log('isAnimation', isAnimation)
     }
   }
 
