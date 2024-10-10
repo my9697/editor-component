@@ -13,7 +13,7 @@ const { styleProps, handleClick } = useCompCommon(props, textStylePropNames)
 
 <template>
   <component :is="tag" @click="handleClick" :style="styleProps" :class="['text-comp']">
-    {{ text }}
+    {{ props.text }}
   </component>
 </template>
 
